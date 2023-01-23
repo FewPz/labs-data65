@@ -10,8 +10,15 @@ def is_even(k):
 
 def minmax(data):
     """ Find min & max function BEST way! """
-    data.sort()
-    return (data[0], data[-1])
+    min_val = data[0]
+    max_val = data[0]
+    
+    for i in range(len(data)):
+        if data[i] < min_val:
+            min_val = data[i]
+        if data[i] > max_val:
+            max_val = data[i]
+    return (min_val, max_val)
 
 def main():
     """ Main function """
