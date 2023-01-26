@@ -23,21 +23,21 @@ class SinglyLinked:
             
     def insertFront(self, name):
         """ Insert a new node at the front of the list """
-        newNode = DataNode(name)
-        newNode.next = self.head
-        self.head = newNode
+        pNew = DataNode(name)
+        pNew.next = self.head
+        self.head = pNew
         self.count += 1
 
     def insertLast(self, name):
         """ Insert a new node at the end of the list """
-        newNode = DataNode(name)
+        pNew = DataNode(name)
         if self.head == None:
-            self.head = newNode
+            self.head = pNew
         else:
             current = self.head
             while current.next != None:
                 current = current.next
-            current.next = newNode
+            current.next = pNew
         self.count += 1
         
     def size(self):
