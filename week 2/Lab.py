@@ -39,6 +39,37 @@ class SinglyLinked:
                 current = current.next
             current.next = pNew
         self.count += 1
+    
+    def insertBefore(self, node, data):
+        """ Insert a new node before the given node """
+        pNew = DataNode(data)
+        if self.head == node:
+            pNew.next = self.head
+            self.head = pNew
+        else:
+            current = self.head
+            while current.next != node:
+                current = current.next
+            if current.next == None:
+                print("Cannot insert, <node> does not exist.")
+                return
+            pNew.next = current.next
+            current.next = pNew
+        self.count += 1
+        
+    def delete(self, node):
+        """ Delete the given node from the list """
+        if self.head == node:
+            self.head = self.head.next
+        else:
+            current = self.head
+            while current.next != node:
+                current = current.next
+            if current.next == None:
+                print("Cannot insert, <node> does not exist.")
+                return
+            current.next = node.next
+        self.count -= 1
         
     def size(self):
         """ Return the number of nodes in the list """
