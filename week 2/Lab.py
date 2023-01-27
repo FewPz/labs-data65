@@ -2,74 +2,80 @@
 
 class DataNode:
     
-    def __init__(self, name=""):
+    def __init__(self, name="") -> None:
         """ Initialize the node with a name and a next pointer """
         self.name = name
         self.next = None
 
 class SinglyLinked:
     
-    def __init__(self):
+    def __init__(self) -> None:
         """ Initialize the list with a count and a head pointer """
         self.count = 0
         self.head = None
-    
+
     def traverse(self):
         """ Traverse the list and print the name of each node """
         current = self.head
+        if (self.count == 0):
+            return print("This is an empty list.")
         while current != None:
             print(current.name)
             current = current.next
-            
-    def insertFront(self, name):
-        """ Insert a new node at the front of the list """
-        pNew = DataNode(name)
-        pNew.next = self.head
-        self.head = pNew
-        self.count += 1
-
-    def insertLast(self, name):
-        """ Insert a new node at the end of the list """
-        pNew = DataNode(name)
-        if self.head == None:
-            self.head = pNew
-        else:
-            current = self.head
-            while current.next != None:
-                current = current.next
-            current.next = pNew
-        self.count += 1
     
     def insertBefore(self, node, data):
         """ Insert a new node before the given node """
+        current = self.head
+        while current:
+            if current.name == node:
+                break
+            current = current.next
+        else:
+            print("Cannot insert, {} does not exist.".format(node))
+            return
         pNew = DataNode(data)
-        if self.head == node:
+        if self.head == current:
             pNew.next = self.head
             self.head = pNew
         else:
-            current = self.head
-            while current.next != node:
-                current = current.next
-            if current.next == None:
-                print("Cannot insert, <node> does not exist.")
-                return
-            pNew.next = current.next
-            current.next = pNew
+            prev = self.head
+            while prev.next != current:
+                prev = prev.next
+            pNew.next = current
+            prev.next = pNew
         self.count += 1
-        
+
     def delete(self, node):
-        """ Delete the given node from the list """
-        if self.head == node:
+        """ Delete a node with a given name """
+        current = self.head
+        if current.name == node:
             self.head = self.head.next
+            self.count -= 1
+            return
+        while current.next != None:
+            if current.next.name == node:
+                current.next = current.next.next
+                self.count -= 1
+                return
+            current = current.next
+        print("Cannot insert, {} does not exist.".format(node))
+
+    def insertFront(self, name):
+        new_node = DataNode(name)
+        new_node.next = self.head
+        self.head = new_node
+        self.count += 1
+
+    def insertLast(self, name):
+        new_node = DataNode(name)
+        if self.head is None:
+            self.head = new_node
         else:
             current = self.head
-            while current.next != node:
+            while current.next is not None:
                 current = current.next
-            if current.next == None:
-                print("Cannot insert, <node> does not exist.")
-                return
-            current.next = node.next
-        self.count -= 1
+            current.next = new_node
+        self.count += 1
         
     def size(self):
         """ Return the number of nodes in the list """
@@ -85,9 +91,33 @@ class SinglyLinked:
         
 def main():
     """ Main functions """
+    print("---------------------")
     mylist = SinglyLinked()
-    mylist.push("John")
-    mylist.push("Tony")
+    mylist.insertLast("John")
+    mylist.insertLast("Tony")
+    mylist.insertFront("Bill")
     mylist.traverse()
+    print("---------------------")
+    mylist.insertBefore("Tony", "Kim")
+    mylist.insertBefore("Tony Stark", "Kim")
+    mylist.traverse()
+    print("---------------------")
+    mylist.delete("John")
+    mylist.delete("John")
+    mylist.delete("John")
+    mylist.traverse()
+    print("---------------------")
+    mylist.delete("Bill")
+    mylist.delete("Kim")
+    mylist.delete("Tony")
+    mylist.traverse()
+    """mylist.delete("Tony")
+    mylist.delete("Tony")"""
+    print("---------------------")
+    mylist.traverse()
+    print("---------------------")
+    mylist.insertBefore("Tony", "Joseph")
+    mylist.traverse()
+
 
 main()
