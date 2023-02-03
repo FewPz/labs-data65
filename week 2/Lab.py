@@ -110,9 +110,6 @@ def main():
     mylist.delete("Bill")
     mylist.delete("Kim")
     mylist.delete("Tony")
-    mylist.traverse()
-    """mylist.delete("Tony")
-    mylist.delete("Tony")"""
     print("---------------------")
     mylist.traverse()
     print("---------------------")
