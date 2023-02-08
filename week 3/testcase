@@ -1,0 +1,29 @@
+def testStack():
+    myStack = ArrayStack()
+    myStack.push(10)
+    myStack.push(20)
+    myStack.push(30)
+    myStack.printStack()
+    x = myStack.pop()
+    print("Call X: " + str(x))
+    myStack.pop()
+    myStack.printStack()
+    myStack.pop()
+    print(myStack.is_empty())
+    myStack.pop()
+
+def testCopyStack():
+    s1 = ArrayStack()
+    s1.push(10)
+    s1.push(20)
+    s1.push(30)
+    s2 = ArrayStack() 
+    s2.push(15); 
+    copyStack(s1, s2)
+    s1.printStack() 
+    s2.printStack()
+
+def testInfixToPostFix():
+    exp = "A+B*C-D/E"
+    postfix = infixToPostfix(exp)
+    print("Postfix of", exp, "is", postfix)
