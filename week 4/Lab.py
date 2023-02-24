@@ -39,42 +39,43 @@ class BST:
             elif data > node.data:
                 node.right = deleteNode(node.right, data)
             else:
-                if node.left is None:
-                    return node.right
-                elif node.right is None:
+                if node.right is None:
                     return node.left
+                elif node.left is None:
+                    return node.right
                 else:
-                    minNode = self.findMin(node.right)
+                    minNode = self.findMin(node.left)
                     node.data = minNode
-                    node.right = deleteNode(node.right, minNode)
+                    node.left = deleteNode(node.left, minNode)
             return node
         self.root = deleteNode(self.root, data)
         
     def preorder(self, root):
         if root is not None:
-            print("->", root.data, end=" ")
+            print("-> ", root.data, end=" ")
             self.preorder(root.left)
             self.preorder(root.right)
             
     def inorder(self, root):
         if root is not None:
             self.inorder(root.left)
-            print("->", root.data, end=" ")
+            print("-> ", root.data, end=" ")
             self.inorder(root.right)
     
     def postorder(self, root):
         if root is not None:
             self.postorder(root.left)
             self.postorder(root.right)
-            print("->", root.data, end=" ")
+            print("-> ", root.data, end=" ")
             
     def traverse(self):
-        print("--- [Pre order] ---")
+        print("")
         self.preorder(self.root)
-        print("\n--- [In order] ---")
+        print("")
         self.inorder(self.root)
-        print("\n--- [Post order] ---")
+        print("")
         self.postorder(self.root)
+        print("")
         
     def is_empty(self):
         return self.root is None
@@ -92,4 +93,3 @@ class BST:
         while current_node.right is not None:
             current_node = current_node.right
         return current_node.data
-    
